@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pro-Étude — Plateforme universitaire aux normes internationales · Pro-Technologie</title>
+<meta name="description" content="Pro-Étude : gestion des universités et écoles supérieures au Gabon. LMD/ECTS, notes, bulletins, emploi du temps, présences, certificats officiels. Développé par Pro-Technologie.">
+<style>
+:root{--nav:#0B2A4A;--nav2:#123A63;--acc:#1E6FB8;--gold:#E0A82E;--gold-d:#B7841A;--bg:#F4F7FA;--ink:#12283F;--mut:#5E7590;--line:#DCE6EF;--ok:#1B9C5B;--card:#fff;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Segoe UI",system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%;height:auto}
+
+/* drapeau tricolore */
+.flag{height:6px;display:flex}
+.flag i{flex:1}.flag .v{background:#009a44}.flag .j{background:var(--gold)}.flag .b{background:#003399}
+
+/* nav */
+nav.top{background:#fff;padding:14px 0;box-shadow:0 2px 8px rgba(0,0,0,.04);position:sticky;top:0;z-index:100}
+nav.top .wrap{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+nav.top .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--nav);font-size:17px}
+nav.top .brand img{width:38px;height:38px;object-fit:contain;border-radius:6px}
+nav.top .links{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+nav.top .links a{color:var(--nav);font-weight:600;font-size:14px}
+nav.top .cta{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#3a2b06;padding:10px 20px;border-radius:9px;font-weight:700;font-size:14px;box-shadow:0 4px 12px rgba(224,168,46,.4)}
+nav.top .cta:hover{text-decoration:none;transform:translateY(-1px)}
+
+/* hero */
+.hero{background:linear-gradient(135deg,#08213b 0%,#0B2A4A 40%,#123A63 100%);color:#fff;padding:60px 24px 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(224,168,46,.2),transparent 70%);pointer-events:none}
+.hero .wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 350px;gap:40px;align-items:center;position:relative;z-index:1}
+.hero .crest{width:120px;height:120px;background:#fff;border-radius:24px;padding:10px;margin:0 auto 20px;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.hero .crest img{width:100%;height:100%;object-fit:contain}
+.hero h1{font-size:44px;font-weight:800;line-height:1.15;margin-bottom:16px;letter-spacing:-.5px}
+.hero h1 span{color:var(--gold);display:block;font-size:22px;font-weight:700;letter-spacing:2px;margin-bottom:8px}
+.hero p.lead{font-size:17px;opacity:.9;margin-bottom:26px;line-height:1.6;max-width:600px}
+.hero .badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.hero .badges span{background:rgba(255,255,255,.1);border:1px solid rgba(224,168,46,.3);padding:5px 12px;border-radius:999px;font-size:12px;font-weight:600}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero .btn{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#3a2b06;padding:14px 28px;border-radius:10px;font-weight:800;font-size:15px;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 20px rgba(224,168,46,.4);transition:transform .15s}
+.hero .btn:hover{text-decoration:none;transform:translateY(-2px)}
+.hero .btn.ghost{background:transparent;border:2px solid rgba(255,255,255,.3);color:#fff;box-shadow:none}
+.hero .visual{background:#fff;border-radius:18px;padding:20px;color:var(--ink);box-shadow:0 24px 60px rgba(0,0,0,.4);transform:rotate(-2deg)}
+.hero .visual::before{content:'';position:absolute}
+.hero .visual .head{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:2px solid var(--line)}
+.hero .visual .head img{width:36px;height:36px;object-fit:contain;background:#fff;border-radius:6px}
+.hero .visual .head b{color:var(--nav);font-size:14px}
+.hero .visual .body{padding:12px 0}
+.hero .visual .kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.hero .visual .kpi div{background:#F0F5FA;padding:10px;border-radius:8px;text-align:center}
+.hero .visual .kpi .n{font-size:22px;font-weight:800;color:var(--nav)}
+.hero .visual .kpi .l{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+.hero .visual ul{list-style:none;padding:0;font-size:12.5px}
+.hero .visual ul li{padding:4px 0;color:var(--nav);display:flex;align-items:center;gap:6px}
+.hero .visual ul li::before{content:'✓';color:var(--ok);font-weight:800}
+
+/* Section title */
+section{padding:60px 24px}
+section .wrap{max-width:1200px;margin:0 auto}
+.section-title{text-align:center;margin-bottom:44px}
+.section-title h2{font-size:32px;color:var(--nav);margin-bottom:8px;font-weight:800}
+.section-title p{color:var(--mut);font-size:15px;max-width:600px;margin:0 auto}
+.section-title .k{color:var(--gold-d);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;display:block}
+
+/* Features grid */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.feat{background:var(--card);border-radius:14px;padding:26px;border:1px solid var(--line);transition:transform .2s, box-shadow .2s}
+.feat:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(11,42,74,.08)}
+.feat .ic{width:50px;height:50px;background:linear-gradient(135deg,var(--nav),var(--acc));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px}
+.feat h3{color:var(--nav);font-size:17px;margin-bottom:8px;font-weight:800}
+.feat p{color:var(--mut);font-size:14px;line-height:1.65}
+.feat.gold .ic{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#3a2b06}
+
+/* Rôles */
+.roles{background:linear-gradient(180deg,#fff 0%,#F4F7FA 100%);padding:60px 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.role{background:var(--card);border-radius:14px;padding:22px;border-top:4px solid var(--acc)}
+.role.rm{border-top-color:var(--gold)}
+.role.ra{border-top-color:var(--acc)}
+.role.rp{border-top-color:var(--ok)}
+.role.re{border-top-color:#B750BE}
+.role .em{font-size:32px;margin-bottom:10px}
+.role h4{color:var(--nav);font-size:16px;margin-bottom:6px}
+.role .rl{font-size:11px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.4px;margin-bottom:12px}
+.role ul{list-style:none;padding:0;font-size:13px;color:var(--ink)}
+.role ul li{padding:3px 0;position:relative;padding-left:16px}
+.role ul li::before{content:'•';position:absolute;left:0;color:var(--acc);font-weight:800}
+
+/* étapes */
+.steps{background:var(--nav);color:#fff;padding:60px 24px}
+.steps .section-title h2{color:#fff}
+.steps .section-title p{color:rgba(255,255,255,.75)}
+.steps .section-title .k{color:var(--gold)}
+.step-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.step{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:24px;position:relative}
+.step .num{position:absolute;top:-15px;left:20px;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#3a2b06;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;box-shadow:0 4px 12px rgba(224,168,46,.4)}
+.step h4{margin-top:12px;margin-bottom:8px;font-size:16px;color:#fff}
+.step p{font-size:13px;color:rgba(255,255,255,.75);line-height:1.6}
+
+/* Contact / CTA final */
+.cta-final{background:linear-gradient(135deg,#0B2A4A,#1E6FB8);color:#fff;padding:70px 24px;text-align:center}
+.cta-final h2{font-size:30px;margin-bottom:12px}
+.cta-final p{font-size:16px;opacity:.9;margin-bottom:26px;max-width:600px;margin-left:auto;margin-right:auto}
+.cta-final .btn{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#3a2b06;padding:14px 32px;border-radius:10px;font-weight:800;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.cta-final .btn:hover{text-decoration:none}
+.contact-info{margin-top:30px;background:rgba(255,255,255,.08);border-radius:14px;padding:22px;max-width:600px;margin-left:auto;margin-right:auto}
+.contact-info b{color:var(--gold);font-size:12px;letter-spacing:.4px;text-transform:uppercase}
+.contact-info .phone{font-size:22px;font-weight:800;margin:8px 0}
+.contact-info a{color:#fff}
+
+/* footer */
+footer{background:#050e1c;color:rgba(255,255,255,.6);padding:30px 24px;text-align:center;font-size:12px}
+footer a{color:var(--gold)}
+
+/* PWA badge */
+.pwa-badge{position:fixed;bottom:20px;right:20px;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#3a2b06;padding:12px 20px;border-radius:999px;font-weight:800;font-size:13px;box-shadow:0 8px 24px rgba(224,168,46,.4);display:none;align-items:center;gap:8px;z-index:99}
+
+@media(max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;text-align:center}
+  .hero .actions{justify-content:center}
+  .hero .badges{justify-content:center}
+  .hero h1{font-size:32px}
+  .hero .visual{transform:none;margin:0 auto;max-width:340px}
+  .section-title h2{font-size:24px}
+  nav.top .links a:not(.cta){display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <a href="#" class="brand"><img src="logo-ministere.jpg" alt="Ministère"><span>Pro-Étude</span></a>
+    <div class="links">
+      <a href="#fonctionnalites">Fonctionnalités</a>
+      <a href="#roles">Rôles</a>
+      <a href="#etapes">Comment ça marche</a>
+      <a href="#documentation">Manuel PDF</a>
+      <a href="#contact">Contact</a>
+      <a href="index-app.html" class="cta">Accéder à l'appli →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="flag"><i class="v"></i><i class="j"></i><i class="b"></i></div>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div style="max-width:80px;margin-bottom:20px"><img src="logo-ministere.jpg" alt="Ministère" style="width:80px;height:80px;background:#fff;border-radius:16px;padding:8px"></div>
+      <h1><span>PLATEFORME UNIVERSITAIRE</span>Pro-Étude</h1>
+      <p class="lead">La solution complète de gestion des universités et écoles supérieures au Gabon. Conforme aux normes internationales <b>LMD/ECTS</b>, avec bulletins officiels, certificats et carte étudiant.</p>
+      <div class="badges">
+        <span>🇬🇦 Aux couleurs du Gabon</span>
+        <span>🎓 LMD/ECTS</span>
+        <span>📱 Installable</span>
+        <span>🔒 Sécurisé</span>
+        <span>📴 Mode hors-ligne</span>
+      </div>
+      <div class="actions">
+        <a href="index-app.html" class="btn">🚀 Accéder à l'application</a>
+        <a href="Pro-Etude_Manuel_Utilisateur.pdf" class="btn ghost" download>📖 Télécharger le manuel</a>
+        <a href="#fonctionnalites" class="btn ghost" style="display:none">Découvrir</a>
+      </div>
+    </div>
+    <div class="visual">
+      <div class="head"><img src="logo-ministere.jpg" alt=""><div><b>Pro-Étude</b><br><span style="font-size:11px;color:var(--mut)">Université Omar Bongo</span></div></div>
+      <div class="body">
+        <div class="kpi">
+          <div><div class="n">180</div><div class="l">Crédits ECTS</div></div>
+          <div><div class="n">14,25</div><div class="l">Moyenne</div></div>
+        </div>
+        <ul>
+          <li>Structure LMD complète</li>
+          <li>Bulletins officiels PDF</li>
+          <li>Carte étudiant avec QR</li>
+          <li>Multi-établissements</li>
+          <li>Messagerie & annonces</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fonctionnalites">
+  <div class="wrap">
+    <div class="section-title">
+      <span class="k">FONCTIONNALITÉS</span>
+      <h2>Tout ce dont votre établissement a besoin</h2>
+      <p>Une plateforme complète pensée pour les universités, écoles supérieures et instituts, avec le ministère de tutelle en supervision.</p>
+    </div>
+    <div class="features">
+      <div class="feat gold"><div class="ic">🎓</div><h3>Structure LMD/ECTS</h3><p>Cycles Licence (180 ECTS), Master (120 ECTS) et Doctorat. Semestres officiels S1-S10, Unités d'Enseignement avec crédits, matières rattachées avec coefficients.</p></div>
+      <div class="feat"><div class="ic">🎯</div><h3>Notes & évaluations</h3><p>Notation sur 20, moyennes pondérées automatiques par matière, par UE et par semestre. Mentions (TB, B, AB, P, Insuffisant). Ranking dans la promotion.</p></div>
+      <div class="feat"><div class="ic">📄</div><h3>Bulletins officiels PDF</h3><p>Bulletins de notes et relevés semestriels aux couleurs de la République gabonaise, avec logo du Ministère, drapeau et signature. Prêts à imprimer.</p></div>
+      <div class="feat gold"><div class="ic">📜</div><h3>Certificats & attestations</h3><p>Certificat de scolarité, attestation de présence, attestation de réussite, carte étudiant avec QR code. Numérotation et validation officielle.</p></div>
+      <div class="feat"><div class="ic">📝</div><h3>Devoirs & remises</h3><p>Le prof publie devoirs et exercices, l'étudiant rend ses copies avec pièce jointe. Le prof note directement depuis les copies reçues.</p></div>
+      <div class="feat"><div class="ic">✅</div><h3>Présences & absences</h3><p>Appel par le prof à chaque cours (présent/retard/absent/justifié). L'étudiant soumet des justificatifs, l'admin valide. Taux d'assiduité calculé.</p></div>
+      <div class="feat"><div class="ic">📅</div><h3>Emploi du temps</h3><p>Grille hebdomadaire par jour, avec matière, prof, salle et filière. Chaque utilisateur voit uniquement ses cours pertinents.</p></div>
+      <div class="feat"><div class="ic">📢</div><h3>Annonces & messagerie</h3><p>Annonces avec 3 niveaux d'importance. Messagerie interne (prof↔étudiant, admin↔tous) et messagerie inter-établissements (ministère).</p></div>
+      <div class="feat gold"><div class="ic">🌐</div><h3>Multi-établissements</h3><p>Le ministère supervise tous les établissements avec statistiques nationales, taux de réussite et moyennes par université. Cloisonnement des données garanti.</p></div>
+      <div class="feat"><div class="ic">🔒</div><h3>Confidentialité & RGPD</h3><p>Vos droits respectés : accès, rectification, portabilité (export JSON), effacement. Mots de passe hashés, données chiffrées.</p></div>
+      <div class="feat"><div class="ic">🌓</div><h3>Mode sombre & recherche</h3><p>Thème clair ou sombre selon vos préférences. Recherche globale instantanée dans tous les étudiants, profs, matières, devoirs et annonces.</p></div>
+      <div class="feat gold"><div class="ic">📱</div><h3>PWA installable</h3><p>Utilisable comme un vrai site web depuis n'importe quel navigateur, ou installable comme une appli sur téléphone (Android/iOS) et ordinateur, avec mode hors-ligne.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="roles" id="roles">
+  <div class="wrap">
+    <div class="section-title">
+      <span class="k">ARCHITECTURE</span>
+      <h2>4 rôles, une plateforme unifiée</h2>
+      <p>Chaque utilisateur voit exactement ce dont il a besoin — ni plus, ni moins.</p>
+    </div>
+    <div class="role-grid">
+      <div class="role rm">
+        <div class="em">🏛️</div>
+        <h4>Ministère de tutelle</h4>
+        <div class="rl">Autorité supérieure</div>
+        <ul>
+          <li>Vue de tous les établissements</li>
+          <li>Statistiques nationales</li>
+          <li>Taux de réussite par université</li>
+          <li>Messagerie inter-établissements</li>
+          <li>Supervision globale</li>
+        </ul>
+      </div>
+      <div class="role ra">
+        <div class="em">🏫</div>
+        <h4>Administration</h4>
+        <div class="rl">Direction établissement</div>
+        <ul>
+          <li>Structure pédagogique (UE/ECTS)</li>
+          <li>Inscription profs & étudiants</li>
+          <li>Notes et bulletins</li>
+          <li>Certificats et attestations</li>
+          <li>Emploi du temps, annonces</li>
+        </ul>
+      </div>
+      <div class="role rp">
+        <div class="em">👨‍🏫</div>
+        <h4>Professeur</h4>
+        <div class="rl">Enseignant</div>
+        <ul>
+          <li>Publier des devoirs</li>
+          <li>Noter les copies</li>
+          <li>Faire l'appel en cours</li>
+          <li>Emploi du temps personnel</li>
+          <li>Messagerie avec étudiants</li>
+        </ul>
+      </div>
+      <div class="role re">
+        <div class="em">🎓</div>
+        <h4>Étudiant</h4>
+        <div class="rl">Apprenant</div>
+        <ul>
+          <li>Rendre ses devoirs</li>
+          <li>Consulter ses résultats & ECTS</li>
+          <li>Télécharger bulletin & certificats</li>
+          <li>Justifier ses absences</li>
+          <li>Voir son emploi du temps</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="etapes">
+  <div class="wrap">
+    <div class="section-title">
+      <span class="k">DÉMARRAGE RAPIDE</span>
+      <h2>4 étapes pour être opérationnel</h2>
+      <p>De l'inscription du ministère à la génération des bulletins, en quelques minutes.</p>
+    </div>
+    <div class="step-grid">
+      <div class="step">
+        <div class="num">1</div>
+        <h4>Premier accès</h4>
+        <p>Créez le compte Autorité de tutelle (ministère). Ce compte supervisera toute la plateforme.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h4>Créer les établissements</h4>
+        <p>Le ministère ajoute chaque université ou école, puis crée le compte administration de chacune.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h4>Structure pédagogique</h4>
+        <p>L'administration crée les semestres, UE avec crédits ECTS, matières, puis inscrit profs et étudiants.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h4>Vie universitaire</h4>
+        <p>Devoirs, notes, présences, annonces, bulletins et certificats officiels — tout se génère automatiquement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="documentation" style="background:#fff;padding:60px 24px;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-title">
+      <span class="k">DOCUMENTATION</span>
+      <h2>Un manuel complet à télécharger</h2>
+      <p>26 pages, 22 captures d'écran, tous les rôles expliqués — pour prendre en main Pro-Étude rapidement.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;max-width:900px;margin:0 auto">
+      <div>
+        <h3 style="color:var(--nav);font-size:20px;margin-bottom:14px">📖 Manuel utilisateur</h3>
+        <p style="color:var(--mut);font-size:14px;line-height:1.7;margin-bottom:20px">Un guide pas-à-pas de la première configuration jusqu'à la génération des bulletins et certificats officiels. Explique chacun des 4 rôles (Ministère, Administration, Professeur, Étudiant) avec des captures d'écran commentées.</p>
+        <ul style="list-style:none;padding:0;color:var(--ink);font-size:13.5px;line-height:2;margin-bottom:20px">
+          <li>✓ Démarrage rapide en 4 étapes</li>
+          <li>✓ Structure LMD/ECTS détaillée</li>
+          <li>✓ Gestion des notes et mentions officielles</li>
+          <li>✓ Bulletins, certificats et carte étudiant</li>
+          <li>✓ Installation PWA sur téléphone</li>
+          <li>✓ Confidentialité et RGPD</li>
+        </ul>
+        <a href="Pro-Etude_Manuel_Utilisateur.pdf" class="btn" download style="background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#3a2b06;padding:14px 28px;border-radius:10px;font-weight:800;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 20px rgba(224,168,46,.4);text-decoration:none">📥 Télécharger le manuel PDF</a>
+      </div>
+      <div style="text-align:center">
+        <div style="background:linear-gradient(135deg,#0B2A4A,#1E6FB8);border-radius:14px;padding:30px;color:#fff;box-shadow:0 16px 40px rgba(0,0,0,.15);transform:rotate(-2deg);position:relative">
+          <div style="height:5px;background:linear-gradient(to right,#009a44 33%,#E0A82E 33% 66%,#003399 66%);border-radius:3px;margin-bottom:20px"></div>
+          <img src="logo-ministere.jpg" alt="Ministère" style="width:56px;height:56px;background:#fff;border-radius:10px;padding:5px;margin-bottom:12px">
+          <div style="font-size:11px;font-weight:800;letter-spacing:1px;opacity:.7">RÉPUBLIQUE GABONAISE</div>
+          <div style="font-size:20px;font-weight:800;margin:8px 0">Pro-Étude</div>
+          <div style="font-size:11px;opacity:.8">Plateforme de gestion universitaire</div>
+          <div style="margin-top:20px;padding:8px 20px;background:linear-gradient(135deg,#B7841A,#E0A82E);color:#3a2b06;border-radius:6px;font-weight:800;letter-spacing:2px;font-size:13px">MANUEL UTILISATEUR</div>
+          <div style="margin-top:14px;font-size:10px;opacity:.7">Version 1.0 — 26 pages</div>
+          <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,.15);font-size:9px;opacity:.6">© Pro-Technologie</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final" id="contact">
+  <div class="wrap">
+    <h2>Prêt à moderniser votre établissement ?</h2>
+    <p>Rejoignez les universités et écoles supérieures qui font confiance à Pro-Étude pour leur gestion pédagogique et administrative.</p>
+    <a href="index-app.html" class="btn">🚀 Accéder à Pro-Étude</a>
+    <div class="contact-info">
+      <b>Contact & Support — Pro-Technologie</b>
+      <div class="phone">📞 077 92 54 58 · 066 92 54 58</div>
+      <div><a href="mailto:ndongafene@protechnologie.com">ndongafene@protechnologie.com</a></div>
+      <div style="margin-top:10px;font-size:12.5px;opacity:.85">📍 Akanda, Estuaire, Gabon</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>Pro-Étude</b> · Logiciel développé par <b style="color:var(--gold)">Pro-Technologie</b></p>
+    <p style="margin-top:6px">© 2026 · Tous droits réservés · 🇬🇦 Fait au Gabon</p>
+  </div>
+</footer>
+
+<a href="index-app.html" class="pwa-badge" id="pwaBadge">📱 Installer l'app</a>
+
+<script>
+// Détecter si PWA installable et afficher le badge
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  const badge = document.getElementById('pwaBadge');
+  badge.style.display = 'inline-flex';
+  badge.onclick = ev => { ev.preventDefault(); e.prompt(); };
+});
+</script>
+
+</body>
+</html>
